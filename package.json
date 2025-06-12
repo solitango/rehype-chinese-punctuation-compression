@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A rehype plugin for Chinese punctuation compression in traditional Chinese typography",
   "main": "index.js",
+  "types": "index.d.ts",
   "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
@@ -29,6 +30,7 @@
   "homepage": "https://github.com/solitango/rehype-chinese-punctuation-compression#readme",
   "files": [
     "index.js",
+    "index.d.ts",
     "README.md",
     "LICENSE"
   ],

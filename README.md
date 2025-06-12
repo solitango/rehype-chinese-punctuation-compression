@@ -1,6 +1,6 @@
 # rehype-chinese-punctuation-compression
 
-一個 rehype 插件，用於實現繁體中文標點符號的擠壓標注功能。
+一個 rehype 插件，用於實現繁體中文標點符號的擠壓標注功能。提供完整的 TypeScript 類型支持。
 
 ## 安裝
 
@@ -26,6 +26,24 @@ const result = await processor.process(html);
 
 console.log(String(result));
 // 輸出：<p>她說：<span class="compressed-punctuation">「</span><span class="compressed-punctuation">《</span>紅樓夢<span class="compressed-punctuation">》</span><span class="compressed-punctuation">。</span>」</p>
+```
+
+### TypeScript 使用
+
+```typescript
+import { unified } from 'unified';
+import rehypeParse from 'rehype-parse';
+import rehypeStringify from 'rehype-stringify';
+import rehypeChinesePunctuationCompression from '@solitango/rehype-chinese-punctuation-compression';
+
+const processor = unified()
+  .use(rehypeParse)
+  .use(rehypeChinesePunctuationCompression) // 完整的類型支持
+  .use(rehypeStringify);
+
+const html: string = '<p>她說：「《紅樓夢》很好看。」</p>';
+const result = await processor.process(html);
+console.log(String(result));
 ```
 
 ## 功能說明
