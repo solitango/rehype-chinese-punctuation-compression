@@ -5,7 +5,7 @@
 ## 安裝
 
 ```bash
-pnpm add rehype-chinese-punctuation-compression
+pnpm add @solitango/rehype-chinese-punctuation-compression
 ```
 
 ## 使用方法
@@ -14,7 +14,7 @@ pnpm add rehype-chinese-punctuation-compression
 import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeStringify from 'rehype-stringify';
-import rehypeChinesePunctuationCompression from 'rehype-chinese-punctuation-compression';
+import rehypeChinesePunctuationCompression from '@solitango/rehype-chinese-punctuation-compression';
 
 const processor = unified()
   .use(rehypeParse)
