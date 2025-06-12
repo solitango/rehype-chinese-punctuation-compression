@@ -1,6 +1,6 @@
 {
   "name": "@solitango/rehype-chinese-punctuation-compression",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A rehype plugin for Chinese punctuation compression in traditional Chinese typography",
   "main": "index.js",
   "types": "index.d.ts",
