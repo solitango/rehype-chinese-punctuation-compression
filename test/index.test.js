@@ -43,9 +43,7 @@ describe('rehype-chinese-punctuation-compression', () => {
         createCompressedPunctuationSpan('《') +
         '紅樓夢》等經典名著，她說：' +
         createCompressedPunctuationSpan('「') +
-        '這些書籍對提升文學素養很有幫助' +
-        createCompressedPunctuationSpan('。') +
-        '」同學們都表示贊同。</p>'
+        '這些書籍對提升文學素養很有幫助。」同學們都表示贊同。</p>'
     );
   });
 
@@ -71,13 +69,9 @@ describe('rehype-chinese-punctuation-compression', () => {
         createCompressedPunctuationSpan('「') +
         '您對這次事件有什麼看法？」部長回答：' +
         createCompressedPunctuationSpan('「') +
-        '我認為這是『積極正面』的發展' +
-        createCompressedPunctuationSpan('。') +
-        '」隨後又補充：' +
+        '我認為這是『積極正面』的發展。」隨後又補充：' +
         createCompressedPunctuationSpan('「') +
-        '具體細節我們會在後續發布會中說明' +
-        createCompressedPunctuationSpan('。') +
-        '」</p>'
+        '具體細節我們會在後續發布會中說明。」</p>'
     );
   });
 
@@ -107,9 +101,7 @@ describe('rehype-chinese-punctuation-compression', () => {
         createCompressedPunctuationSpan('「') +
         '讀過！」然後討論書中的情節。大家都說：' +
         createCompressedPunctuationSpan('「') +
-        '孫悟空很厲害' +
-        createCompressedPunctuationSpan('。') +
-        '」討論很熱烈。</p>'
+        '孫悟空很厲害。」討論很熱烈。</p>'
     );
   });
 });
