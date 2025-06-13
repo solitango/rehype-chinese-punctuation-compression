@@ -1,16 +1,30 @@
 # rehype-chinese-punctuation-compression
 
-一個 rehype 插件，用於實現繁體中文標點符號的擠壓標注功能。提供完整的 TypeScript 類型支持。
+rehype-chinese-punctuation-compression 是一個用於實現標點擠壓的 rehype 插件。本插件會掃描 HTML AST 中所有 Text 節點，並用 `compressed-punctuation` 這一 class 標注其中需要擠壓之標點。
 
-## 安裝
+本項目使用 [MIT 授權協議](https://github.com/solitango/rehype-chinese-punctuation-compression/blob/main/LICENSE) 共享代碼。
+
+## 何謂標點擠壓？
+
+在中文排版中，有時會出現連續使用標點符號之情況，標點擠壓即縮減特定連續標點之間的間距，使其排版上更加美觀之行為。
+
+以下是開啓標點擠壓與否之效果對比圖：
+
+![Example Without Punctuation Compression](/screenshots/example_without_pc.png?raw=true)
+
+![Example With Punctuation Compression](/screenshots/example_with_pc.png?raw=true)
+
+## 使用方法
+
+以 pnpm 為例，首先需要安裝本插件：
 
 ```bash
 pnpm add @solitango/rehype-chinese-punctuation-compression
 ```
 
-## 使用方法
+可以如此使用 unified 處理 AST：
 
-```javascript
+```typescript
 import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeStringify from 'rehype-stringify';
@@ -21,51 +35,31 @@ const processor = unified()
   .use(rehypeChinesePunctuationCompression)
   .use(rehypeStringify);
 
-const html = '<p>她說：「《紅樓夢》很好看。」</p>';
+const html = '<p>她最近在讀《紅樓夢》。</p>';
 const result = await processor.process(html);
 
-console.log(String(result));
-// 輸出：<p>她說：<span class="compressed-punctuation">「</span><span class="compressed-punctuation">《</span>紅樓夢<span class="compressed-punctuation">》</span><span class="compressed-punctuation">。</span>」</p>
+console.log(result.toString());
+// 輸出：<p>她最近在讀《紅樓夢<span class="compressed-punctuation">》</span>。</p>
 ```
 
-### TypeScript 使用
+也可以在支援 rehype 插件之項目（如 [Astro](https://github.com/withastro/astro)）中使用本插件：
 
-```typescript
-import { unified } from 'unified';
-import rehypeParse from 'rehype-parse';
-import rehypeStringify from 'rehype-stringify';
+```javascript
+// @ts-check
+import { defineConfig } from 'astro/config';
+
 import rehypeChinesePunctuationCompression from '@solitango/rehype-chinese-punctuation-compression';
 
-const processor = unified()
-  .use(rehypeParse)
-  .use(rehypeChinesePunctuationCompression) // 完整的類型支持
-  .use(rehypeStringify);
-
-const html: string = '<p>她說：「《紅樓夢》很好看。」</p>';
-const result = await processor.process(html);
-console.log(String(result));
+// https://astro.build/config
+export default defineConfig({
+  /* ... */
+  markdown: {
+    rehypePlugins: [rehypeChinesePunctuationCompression],
+  },
+});
 ```
 
-## 功能說明
-
-此插件會根據中文標點擠壓規則，自動標注需要被擠壓的標點符號。被標注的標點符號會被包裹在 `<span class="compressed-punctuation">` 標籤中。
-
-### 標點符號分類
-
-- **靠左標點**：`」`、`』`、`）`、`》`
-- **靠右標點**：`「`、`『`、`（`、`《`
-- **靠中標點**：`，`、`。`、`、`、`：`、`；`、`．`
-- **不可擠壓標點**：`？`、`！`
-
-### 擠壓規則
-
-1. **靠左標點** + 下一字符為任意標點 → 擠壓此標點
-2. **靠右標點** + 前一字符為靠右或靠中標點 → 擠壓此標點
-3. **靠中標點** + 下一字符為靠左標點 → 擠壓此標點
-
-## CSS 樣式
-
-為了實現標點擠壓的視覺效果，你需要在 CSS 中加入以下樣式：
+在實際展示時，需要手動添加以下樣式來擠壓標點：
 
 ```css
 .compressed-punctuation {
@@ -73,12 +67,11 @@ console.log(String(result));
 }
 ```
 
-## 測試
+## 鳴謝
 
-```bash
-pnpm test
-```
+感謝以下項目／文章提供之啓發：
 
-## 授權
-
-MIT
+- [漢字標準格式](https://github.com/ethantw/Han)
+- [Requirements for Chinese Text Layout
+  中文排版需求](https://www.w3.org/TR/clreq/)
+- [自动处理网页里的全角引号和标点挤压](https://archive.casouri.cc/note/2021/full-width-quote/index.html)
