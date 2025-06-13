@@ -68,15 +68,6 @@ function shouldCompress(text, index) {
     return true;
   }
 
-  // 靠中標點且下一字符為靠左標點，則擠壓此標點
-  if (
-    PUNCTUATION_TYPES.CENTER.has(currentChar) &&
-    nextChar &&
-    PUNCTUATION_TYPES.LEFT.has(nextChar)
-  ) {
-    return true;
-  }
-
   return false;
 }
 
