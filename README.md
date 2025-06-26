@@ -53,7 +53,7 @@ const processor = unified()
   .use(rehypeStringify);
 ```
 
-該配置像有兩個 `'traditional'` 和 `'simplified'` 兩個合法值，未選擇則自動回落至繁體中文。
+該配置項有兩個 `'traditional'` 和 `'simplified'` 兩個合法值，未選擇則自動回落至繁體中文。
 
 ## 在其他項目中使用
 
@@ -69,9 +69,7 @@ import rehypeChinesePunctuationCompression from '@solitango/rehype-chinese-punct
 export default defineConfig({
   /* ... */
   markdown: {
-    rehypePlugins: [
-      [rehypeChinesePunctuationCompression],
-    ],
+    rehypePlugins: [rehypeChinesePunctuationCompression],
   },
 });
 ```
