@@ -4,7 +4,8 @@ globs:
 alwaysApply: true
 ---
 - 使用 Pnpm 作為包管理器
-- 使用 JavaScript 而不是 TypeScript
+- TypeScript
 - 積極運用 JSDoc 編寫文檔
 - 不要對一些顯而易見的流程進行註釋
-- 使用繁體中文進行對話 
+- 使用繁體中文進行對話
+- 除非明確要求，不要擅自改寫現有代碼邏輯
