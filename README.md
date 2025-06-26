@@ -2,7 +2,7 @@
 
 rehype-chinese-punctuation-compression 是一個用於實現標點擠壓的 rehype 插件。本插件會掃描 HTML AST 中所有 Text 節點，並用 `compressed-punctuation` 這一 class 標注其中需要擠壓之標點。
 
-本項目使用 [MIT 授權協議](https://github.com/solitango/rehype-chinese-punctuation-compression/blob/main/LICENSE) 共享代碼。
+本項目支持繁體中文和簡體中文，並使用 [MIT 授權協議](https://github.com/solitango/rehype-chinese-punctuation-compression/blob/main/LICENSE) 共享代碼。
 
 ## 何謂標點擠壓？
 
@@ -24,7 +24,7 @@ pnpm add @solitango/rehype-chinese-punctuation-compression
 
 可以如此使用 unified 處理 AST：
 
-```javascript
+```typescript
 import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeStringify from 'rehype-stringify';
@@ -44,38 +44,16 @@ console.log(result.toString());
 
 ## 配置選項
 
-本插件支援以下配置選項：
+本插件支援以 `scriptSystem` 選項選擇文字系統，只需如此傳入參數即可：
 
-### `scriptSystem`
-
-- 類型：`'traditional' | 'simplified'`
-- 預設值：`'traditional'`
-- 說明：指定中文文字系統，用於決定標點符號的擠壓規則
-
-**繁體中文（預設）：**
-
-```javascript
+```typescript
 const processor = unified()
   .use(rehypeParse)
   .use(rehypeChinesePunctuationCompression, { scriptSystem: 'traditional' })
   .use(rehypeStringify);
 ```
 
-**簡體中文：**
-
-```javascript
-const processor = unified()
-  .use(rehypeParse)
-  .use(rehypeChinesePunctuationCompression, { scriptSystem: 'simplified' })
-  .use(rehypeStringify);
-```
-
-### 繁體中文與簡體中文的差異
-
-兩種文字系統在標點符號擠壓規則上有所不同：
-
-- **繁體中文**：僅對特定位置的標點符號進行擠壓
-- **簡體中文**：對更多標點符號（如 `，`、`。`、`、`、`？`、`！`、`：`、`；`）進行擠壓
+該配置像有兩個 `'traditional'` 和 `'simplified'` 兩個合法值，未選擇則自動回落至繁體中文。
 
 ## 在其他項目中使用
 
@@ -92,7 +70,7 @@ export default defineConfig({
   /* ... */
   markdown: {
     rehypePlugins: [
-      [rehypeChinesePunctuationCompression, { scriptSystem: 'traditional' }],
+      [rehypeChinesePunctuationCompression],
     ],
   },
 });
