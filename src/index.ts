@@ -22,9 +22,9 @@ const fullWidthPunctuations = new Set([
   '、',
   '：',
   '；',
+  '·',
   '？',
   '！',
-  '．',
   '－',
   '～',
 ] as const);
@@ -48,6 +48,7 @@ enum PunctuationType {
   LEFT,
   RIGHT,
   CENTER,
+  NON_COMPRESSIBLE,
 }
 
 /**
@@ -73,6 +74,7 @@ function getTCPunctuationType(
     '”',
     '’',
   ]);
+
   const rightPunctuations = new Set<FullWidthPunctuation>([
     '「',
     '『',
@@ -80,6 +82,15 @@ function getTCPunctuationType(
     '《',
     '“',
     '‘',
+  ]);
+
+  const centerPunctuations = new Set<FullWidthPunctuation>([
+    '，',
+    '。',
+    '、',
+    '：',
+    '；',
+    '·',
   ]);
 
   if (leftPunctuations.has(punctuation)) {
@@ -90,7 +101,11 @@ function getTCPunctuationType(
     return PunctuationType.RIGHT;
   }
 
-  return PunctuationType.CENTER;
+  if (centerPunctuations.has(punctuation)) {
+    return PunctuationType.CENTER;
+  }
+
+  return PunctuationType.NON_COMPRESSIBLE;
 }
 
 /**
@@ -102,7 +117,7 @@ function getSCPunctuationType(
   punctuation: FullWidthPunctuation
 ): PunctuationType {
   // 在簡體中靠左但在繁體中靠中的標點符號
-  const scLeftOverrides = new Set(['，', '。', '、', '？', '！', '：', '；']);
+  const scLeftOverrides = new Set(['，', '。', '、', '：', '；', '？', '！']);
 
   if (scLeftOverrides.has(punctuation)) {
     return PunctuationType.LEFT;

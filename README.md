@@ -24,7 +24,7 @@ pnpm add @solitango/rehype-chinese-punctuation-compression
 
 可以如此使用 unified 處理 AST：
 
-```typescript
+```javascript
 import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeStringify from 'rehype-stringify';
@@ -42,6 +42,43 @@ console.log(result.toString());
 // 輸出：<p>她最近在讀《紅樓夢<span class="compressed-punctuation">》</span>。</p>
 ```
 
+## 配置選項
+
+本插件支援以下配置選項：
+
+### `scriptSystem`
+
+- 類型：`'traditional' | 'simplified'`
+- 預設值：`'traditional'`
+- 說明：指定中文文字系統，用於決定標點符號的擠壓規則
+
+**繁體中文（預設）：**
+
+```javascript
+const processor = unified()
+  .use(rehypeParse)
+  .use(rehypeChinesePunctuationCompression, { scriptSystem: 'traditional' })
+  .use(rehypeStringify);
+```
+
+**簡體中文：**
+
+```javascript
+const processor = unified()
+  .use(rehypeParse)
+  .use(rehypeChinesePunctuationCompression, { scriptSystem: 'simplified' })
+  .use(rehypeStringify);
+```
+
+### 繁體中文與簡體中文的差異
+
+兩種文字系統在標點符號擠壓規則上有所不同：
+
+- **繁體中文**：僅對特定位置的標點符號進行擠壓
+- **簡體中文**：對更多標點符號（如 `，`、`。`、`、`、`？`、`！`、`：`、`；`）進行擠壓
+
+## 在其他項目中使用
+
 也可以在支援 rehype 插件之項目（如 [Astro](https://github.com/withastro/astro)）中使用本插件：
 
 ```javascript
@@ -54,10 +91,14 @@ import rehypeChinesePunctuationCompression from '@solitango/rehype-chinese-punct
 export default defineConfig({
   /* ... */
   markdown: {
-    rehypePlugins: [rehypeChinesePunctuationCompression],
+    rehypePlugins: [
+      [rehypeChinesePunctuationCompression, { scriptSystem: 'traditional' }],
+    ],
   },
 });
 ```
+
+## 樣式設定
 
 在實際展示時，需要手動添加以下樣式來擠壓標點：
 
