@@ -1,15 +1,16 @@
 {
   "name": "@solitango/rehype-chinese-punctuation-compression",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A rehype plugin for Chinese punctuation compression in traditional Chinese typography",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
+    "build": "tsc",
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepublishOnly": "pnpm test && pnpm format:check"
+    "prepublishOnly": "pnpm build && pnpm test && pnpm format:check"
   },
   "keywords": [
     "rehype",
@@ -29,8 +30,7 @@
   },
   "homepage": "https://github.com/solitango/rehype-chinese-punctuation-compression#readme",
   "files": [
-    "index.js",
-    "index.d.ts",
+    "dist/",
     "README.md",
     "LICENSE"
   ],
@@ -41,11 +41,14 @@
   "devDependencies": {
     "@jest/globals": "^30.0.0",
     "@types/hast": "^3.0.0",
+    "@types/node": "^22.10.2",
     "jest": "^30.0.0",
     "prettier": "^3.5.3",
     "rehype": "^13.0.2",
     "rehype-parse": "^9.0.1",
-    "rehype-stringify": "^10.0.1"
+    "rehype-stringify": "^10.0.1",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "unified": "^11.0.5",
