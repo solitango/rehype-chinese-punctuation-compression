@@ -41,17 +41,16 @@
   "devDependencies": {
     "@jest/globals": "^30.0.0",
     "@types/hast": "^3.0.0",
-    "@types/node": "^22.10.2",
     "jest": "^30.0.0",
     "prettier": "^3.5.3",
     "rehype": "^13.0.2",
     "rehype-parse": "^9.0.1",
     "rehype-stringify": "^10.0.1",
     "ts-jest": "^29.2.5",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "unified": "^11.0.5"
   },
   "dependencies": {
-    "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0"
   }
 }
