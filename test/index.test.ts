@@ -14,7 +14,7 @@ import rehypeChinesePunctuationCompression from '../dist/index.js';
 async function processTCHtml(html: string): Promise<string> {
   const result = await unified()
     .use(rehypeParse, { fragment: true })
-    .use(rehypeChinesePunctuationCompression, { scriptSystem: 'traditional' })
+    .use(rehypeChinesePunctuationCompression, { script: 'traditional' })
     .use(rehypeStringify)
     .process(html);
 
@@ -29,7 +29,7 @@ async function processTCHtml(html: string): Promise<string> {
 async function processSCHtml(html: string): Promise<string> {
   const result = await unified()
     .use(rehypeParse, { fragment: true })
-    .use(rehypeChinesePunctuationCompression, { scriptSystem: 'simplified' })
+    .use(rehypeChinesePunctuationCompression, { script: 'simplified' })
     .use(rehypeStringify)
     .process(html);
 

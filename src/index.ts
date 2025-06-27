@@ -255,7 +255,7 @@ function processTextNode(
  * 插件配置選項
  */
 interface RehypeChinesePunctuationCompressionOptions {
-  scriptSystem?: 'traditional' | 'simplified';
+  script?: 'traditional' | 'simplified';
 }
 
 /**
@@ -265,13 +265,13 @@ interface RehypeChinesePunctuationCompressionOptions {
  */
 export default function rehypeChinesePunctuationCompression(
   options: RehypeChinesePunctuationCompressionOptions = {
-    scriptSystem: 'traditional',
+    script: 'traditional',
   }
 ) {
-  const { scriptSystem } = options;
+  const { script } = options;
 
   const punctuationClassifier: PunctuationClassifier =
-    scriptSystem === 'simplified' ? getSCPunctuationType : getTCPunctuationType;
+    script === 'simplified' ? getSCPunctuationType : getTCPunctuationType;
 
   return function transformer(tree: Root): Root {
     visit(tree, 'element', (node: Element) => {

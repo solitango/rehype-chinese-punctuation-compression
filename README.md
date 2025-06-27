@@ -44,12 +44,12 @@ console.log(result.toString());
 
 ## 配置選項
 
-本插件支援以 `scriptSystem` 選項選擇文字系統，只需如此傳入參數即可：
+本插件支援以 `script` 選項選擇文字系統，只需如此傳入參數即可：
 
 ```typescript
 const processor = unified()
   .use(rehypeParse)
-  .use(rehypeChinesePunctuationCompression, { scriptSystem: 'traditional' })
+  .use(rehypeChinesePunctuationCompression, { script: 'simplified' })
   .use(rehypeStringify);
 ```
 
